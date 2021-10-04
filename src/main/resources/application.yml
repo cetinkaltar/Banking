@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: bankish-payment-service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/banking
+    username: postgres
+    password:
+    initialization-mode: always
+    data: classpath:data.sql
+
+  liquibase:
+    change-log: classpath:liquibase-changeLog.xml

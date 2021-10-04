@@ -1,0 +1,105 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20210925/1000
+      author: "CETIN KALTAR"
+      changes:
+        - createTable:
+            tableName: customer
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: first_name
+                  type: varchar(64)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_name
+                  type: varchar(64)
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: account
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: iban
+                  type: varchar(64)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: customer_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: balance
+                  type: currency
+                  defaultValue : 0
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: transaction
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: amount
+                  type: currency
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(64)
+              - column:
+                  name: from_account_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: to_account_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: date
+                  type: datetime
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseColumnNames: customer_id
+            baseTableName: account
+            constraintName: fk_account_customer
+            onDelete: CASCADE
+            referencedColumnNames: id
+            referencedTableName: customer
+        - addForeignKeyConstraint:
+            baseColumnNames: from_account_id
+            baseTableName: transaction
+            constraintName: fk_from_account_transaction
+            onDelete: CASCADE
+            referencedColumnNames: id
+            referencedTableName: account
+        - addForeignKeyConstraint:
+            baseColumnNames: to_account_id
+            baseTableName: transaction
+            constraintName: fk_to_account_transaction
+            onDelete: CASCADE
+            referencedColumnNames: id
+            referencedTableName: account

@@ -1,0 +1,14 @@
+insert into customer(first_name,last_name) VALUES('Cetin', 'Kaltar');
+insert into customer(first_name,last_name) VALUES('Ricardo', 'Quaresma');
+insert into account(iban,balance,customer_id) VALUES('EE111111', 1000,1);
+insert into account(iban,balance,customer_id) VALUES('EE222222', 1000,1);
+insert into account(iban,balance,customer_id) VALUES('EE333333', 1000,2);
+insert into account(iban,balance,customer_id) VALUES('EE444444', 1000,2);
+insert into transaction(amount,description,from_account_id,to_account_id,date) VALUES (10,'desc',(select id from account where iban='EE111111' limit 1) ,(select id from account where iban='EE222222' limit 1),now());
+insert into transaction(amount,description,from_account_id,to_account_id,date) VALUES (11,'desc',(select id from account where iban='EE222222' limit 1),(select id from account where iban='EE111111' limit 1),now());
+insert into transaction(amount,description,from_account_id,to_account_id,date) VALUES (12,'desc',(select id from account where iban='EE111111' limit 1) ,(select id from account where iban='EE222222' limit 1),now());
+insert into transaction(amount,description,from_account_id,to_account_id,date) VALUES (13,'desc',(select id from account where iban='EE222222' limit 1) ,(select id from account where iban='EE222222' limit 1),now());
+insert into transaction(amount,description,from_account_id,to_account_id,date) VALUES (14,'desc',(select id from account where iban='EE111111' limit 1) ,(select id from account where iban='EE444444' limit 1),now());
+insert into transaction(amount,description,from_account_id,to_account_id,date) VALUES (15,'desc',(select id from account where iban='EE333333' limit 1) ,(select id from account where iban='EE222222' limit 1),now());
+insert into transaction(amount,description,from_account_id,to_account_id,date) VALUES (16,'desc',(select id from account where iban='EE111111' limit 1) ,(select id from account where iban='EE444444' limit 1),now());
+insert into transaction(amount,description,from_account_id,to_account_id,date) VALUES (17,'desc',(select id from account where iban='EE444444' limit 1) ,(select id from account where iban='EE222222' limit 1),now());
